@@ -3,3 +3,4 @@ i*.pyc
 .coverage
 data/amplicon.fasta.gz
 **/**/__pycache__
+**/notes.txt
