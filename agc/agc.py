@@ -15,13 +15,10 @@
 
 import argparse
 import sys
-import os
 import gzip
-import statistics
 import textwrap
 from pathlib import Path
-from collections import Counter
-from typing import Iterator, Dict, List
+from typing import Iterator, List
 
 # https://github.com/briney/nwalign3
 # ftp://ftp.ncbi.nih.gov/blast/matrices/
@@ -63,7 +60,7 @@ def get_arguments():  # pragma: no cover
     """
     # Parsing arguments
     parser = argparse.ArgumentParser(
-        description=__doc__, usage="{0} -h".format(sys.argv[0])
+        description=__doc__, usage=f"{sys.argv[0]} -h"
     )
     parser.add_argument(
         "-i",
@@ -128,7 +125,8 @@ def dereplication_fulllength(
     :param amplicon_file: (Path) Path to the amplicon file in FASTA.gz format.
     :param minseqlen: (int) Minimum amplicon sequence length
     :param mincount: (int) Minimum amplicon count
-    :return: A generator object that provides a (list)[sequences, count] of sequence with a count >= mincount and a length >= minseqlen.
+    :return: A generator object that provides a (list)[sequences, count] of sequence
+    with a count >= mincount and a length >= minseqlen.
     """
     counts = {}
     for seq in read_fasta(amplicon_file, minseqlen):
@@ -144,7 +142,8 @@ def dereplication_fulllength(
 def get_identity(alignment_list: List[str]) -> float:
     """Compute the identity rate between two sequences
 
-    :param alignment_list:  (list) A list of aligned sequences in the format ["SE-QUENCE1", "SE-QUENCE2"]
+    :param alignment_list:  (list) A list of aligned sequences in the
+    format ["SE-QUENCE1", "SE-QUENCE2"]
     :return: (float) The rate of identity between the two sequences.
     """
     seq_a = alignment_list[0]
