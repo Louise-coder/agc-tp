@@ -130,7 +130,15 @@ def dereplication_fulllength(
     :param mincount: (int) Minimum amplicon count
     :return: A generator object that provides a (list)[sequences, count] of sequence with a count >= mincount and a length >= minseqlen.
     """
-    pass
+    counts = {}
+    for seq in read_fasta(amplicon_file, minseqlen):
+        counts[seq] = counts.get(seq, 0) + 1
+    sorted_counts = sorted(
+        counts.items(), key=lambda item: item[1], reverse=True
+    )
+    for seq, count in sorted_counts:
+        if count >= mincount:
+            yield [seq, count]
 
 
 def get_identity(alignment_list: List[str]) -> float:
