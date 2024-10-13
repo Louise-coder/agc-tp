@@ -22,6 +22,7 @@ import textwrap
 from pathlib import Path
 from collections import Counter
 from typing import Iterator, Dict, List
+
 # https://github.com/briney/nwalign3
 # ftp://ftp.ncbi.nih.gov/blast/matrices/
 import nwalign3 as nw
@@ -55,23 +56,47 @@ def isfile(path: str) -> Path:  # pragma: no cover
     return myfile
 
 
-def get_arguments(): # pragma: no cover
+def get_arguments():  # pragma: no cover
     """Retrieves the arguments of the program.
 
     :return: An object that contains the arguments
     """
     # Parsing arguments
-    parser = argparse.ArgumentParser(description=__doc__, usage=
-                                     "{0} -h"
-                                     .format(sys.argv[0]))
-    parser.add_argument('-i', '-amplicon_file', dest='amplicon_file', type=isfile, required=True, 
-                        help="Amplicon is a compressed fasta file (.fasta.gz)")
-    parser.add_argument('-s', '-minseqlen', dest='minseqlen', type=int, default = 400,
-                        help="Minimum sequence length for dereplication (default 400)")
-    parser.add_argument('-m', '-mincount', dest='mincount', type=int, default = 10,
-                        help="Minimum count for dereplication  (default 10)")
-    parser.add_argument('-o', '-output_file', dest='output_file', type=Path,
-                        default=Path("OTU.fasta"), help="Output file")
+    parser = argparse.ArgumentParser(
+        description=__doc__, usage="{0} -h".format(sys.argv[0])
+    )
+    parser.add_argument(
+        "-i",
+        "-amplicon_file",
+        dest="amplicon_file",
+        type=isfile,
+        required=True,
+        help="Amplicon is a compressed fasta file (.fasta.gz)",
+    )
+    parser.add_argument(
+        "-s",
+        "-minseqlen",
+        dest="minseqlen",
+        type=int,
+        default=400,
+        help="Minimum sequence length for dereplication (default 400)",
+    )
+    parser.add_argument(
+        "-m",
+        "-mincount",
+        dest="mincount",
+        type=int,
+        default=10,
+        help="Minimum count for dereplication  (default 10)",
+    )
+    parser.add_argument(
+        "-o",
+        "-output_file",
+        dest="output_file",
+        type=Path,
+        default=Path("OTU.fasta"),
+        help="Output file",
+    )
     return parser.parse_args()
 
 
@@ -85,7 +110,9 @@ def read_fasta(amplicon_file: Path, minseqlen: int) -> Iterator[str]:
     pass
 
 
-def dereplication_fulllength(amplicon_file: Path, minseqlen: int, mincount: int) -> Iterator[List]:
+def dereplication_fulllength(
+    amplicon_file: Path, minseqlen: int, mincount: int
+) -> Iterator[List]:
     """Dereplicate the set of sequence
 
     :param amplicon_file: (Path) Path to the amplicon file in FASTA.gz format.
@@ -95,6 +122,7 @@ def dereplication_fulllength(amplicon_file: Path, minseqlen: int, mincount: int)
     """
     pass
 
+
 def get_identity(alignment_list: List[str]) -> float:
     """Compute the identity rate between two sequences
 
@@ -103,7 +131,14 @@ def get_identity(alignment_list: List[str]) -> float:
     """
     pass
 
-def abundance_greedy_clustering(amplicon_file: Path, minseqlen: int, mincount: int, chunk_size: int, kmer_size: int) -> List:
+
+def abundance_greedy_clustering(
+    amplicon_file: Path,
+    minseqlen: int,
+    mincount: int,
+    chunk_size: int,
+    kmer_size: int,
+) -> List:
     """Compute an abundance greedy clustering regarding sequence count and identity.
     Identify OTU sequences.
 
@@ -126,10 +161,10 @@ def write_OTU(OTU_list: List, output_file: Path) -> None:
     pass
 
 
-#==============================================================
+# ==============================================================
 # Main program
-#==============================================================
-def main(): # pragma: no cover
+# ==============================================================
+def main():  # pragma: no cover
     """
     Main program function
     """
@@ -138,6 +173,5 @@ def main(): # pragma: no cover
     # Votre programme ici
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
