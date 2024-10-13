@@ -107,7 +107,15 @@ def read_fasta(amplicon_file: Path, minseqlen: int) -> Iterator[str]:
     :param minseqlen: (int) Minimum amplicon sequence length
     :return: A generator object that provides the Fasta sequences (str).
     """
-    pass
+    seq = ""
+    with gzip.open(amplicon_file, "rt") as monfich:
+        for line in monfich:
+            if line.startswith(">"):
+                if len(seq) >= minseqlen:
+                    yield seq
+                seq = ""
+            else:
+                seq += line.strip()
 
 
 def dereplication_fulllength(
