@@ -178,18 +178,19 @@ def abundance_greedy_clustering(
     )
     all_otus = []
     for seq, count in most_abundant:
-        is_otu = True
-        for otu_seq, _ in all_otus:
-            alignment = nw.global_align(
-                seq,
-                otu_seq,
-                gap_open=-1,
-                gap_extend=-1,
-                matrix=str(Path(__file__).parent / "MATCH"),
+        is_otu = all(
+            get_identity(
+                nw.global_align(
+                    seq,
+                    otu_seq,
+                    gap_open=-1,
+                    gap_extend=-1,
+                    matrix=str(Path(__file__).parent / "MATCH"),
+                )
             )
-            if get_identity(alignment) > 97:
-                is_otu = False
-                break
+            <= 97
+            for otu_seq, _ in all_otus
+        )
         if is_otu:
             all_otus.append([seq, count])
     return all_otus
