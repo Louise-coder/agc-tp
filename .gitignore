@@ -2,3 +2,4 @@ __py_cache__
 i*.pyc
 .coverage
 data/amplicon.fasta.gz
+**/**/__pycache__
