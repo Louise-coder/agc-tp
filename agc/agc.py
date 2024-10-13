@@ -26,15 +26,14 @@ from typing import Iterator, Dict, List
 # ftp://ftp.ncbi.nih.gov/blast/matrices/
 import nwalign3 as nw
 
-__author__ = "Your Name"
+__author__ = "Louise LAM"
 __copyright__ = "Universite Paris Diderot"
-__credits__ = ["Your Name"]
+__credits__ = ["Louise LAM"]
 __license__ = "GPL"
 __version__ = "1.0.0"
-__maintainer__ = "Your Name"
-__email__ = "your@email.fr"
+__maintainer__ = "Louise LAM"
+__email__ = "louise.lam@etu.u-paris.fr"
 __status__ = "Developpement"
-
 
 
 def isfile(path: str) -> Path:  # pragma: no cover
