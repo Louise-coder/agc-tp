@@ -201,7 +201,10 @@ def write_OTU(OTU_list: List, output_file: Path) -> None:
     :param OTU_list: (list) A list of OTU sequences
     :param output_file: (Path) Path to the output file
     """
-    pass
+    with open(output_file, "w", encoding="utf-8") as file:
+        for i, (otu, count) in enumerate(OTU_list):
+            file.write(f">OTU_{i+1} occurrence:{count}\n")
+            file.write(f"{textwrap.fill(otu, 80)}\n")
 
 
 # ==============================================================
