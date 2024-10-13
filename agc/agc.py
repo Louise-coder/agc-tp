@@ -218,6 +218,10 @@ def main():  # pragma: no cover
     # Get arguments
     args = get_arguments()
     # Votre programme ici
+    all_otus = abundance_greedy_clustering(
+        args.amplicon_file, args.minseqlen, args.mincount, 0, 0
+    )
+    write_OTU(all_otus, args.output_file)
 
 
 if __name__ == "__main__":
