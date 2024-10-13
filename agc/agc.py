@@ -116,6 +116,8 @@ def read_fasta(amplicon_file: Path, minseqlen: int) -> Iterator[str]:
                 seq = ""
             else:
                 seq += line.strip()
+        if len(seq) >= minseqlen:  # last sequence
+            yield seq
 
 
 def dereplication_fulllength(
